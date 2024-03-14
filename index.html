@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Quantum Bot</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .chat-container {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center my-4">Simple Quantum Bot</h1>
+        <div class="chat-container mb-3" id="chat-container">
+            <!-- Chat messages will appear here -->
+        </div>
+        <form id="chat-form">
+            <div class="input-group">
+                <input type="text" id="user-message" class="form-control" placeholder="Type a message...">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#chat-form').submit(function(e) {
+                e.preventDefault();
+                var userMessage = $('#user-message').val();
+                $('#chat-container').append('<div class="alert alert-primary" role="alert">You: ' + userMessage + '</div>');
+                $('#user-message').val('');
+                $.post('/chat', { user_message: userMessage }, function(data) {
+                    $('#chat-container').append('<div class="alert alert-secondary" role="alert">Bot: ' + data.bot_response + '</div>');
+                    $('#chat-container').scrollTop($('#chat-container')[0].scrollHeight);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

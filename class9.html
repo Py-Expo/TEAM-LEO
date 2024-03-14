@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Question Page</title>
+<style>
+    
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .question {
+        margin-bottom: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div class="question">
+    <p>1. What is the capital of France?</p>
+    <input type="radio" name="q1" value="paris"> Paris<br>
+    <input type="radio" name="q1" value="berlin"> Berlin<br>
+    <input type="radio" name="q1" value="london"> London<br>
+    <input type="radio" name="q1" value="rome"> Rome<br>
+</div>
+
+<div class="question">
+    <p>2. Which planet is known as the Red Planet?</p>
+    <input type="radio" name="q2" value="venus"> Venus<br>
+    <input type="radio" name="q2" value="mars"> Mars<br>
+    <input type="radio" name="q2" value="jupiter"> Jupiter<br>
+    <input type="radio" name="q2" value="saturn"> Saturn<br>
+</div>
+
+<button onclick="checkAnswers()">Check Answers</button>
+
+<script>
+function checkAnswers() {
+   
+    var correctAnswers = ["paris", "mars"];
+  
+    var correctCount = 0;
+
+    
+    for (var i = 1; i <= 2; i++) {
+     
+        var selectedAnswer = document.querySelector('input[name="q'+i+'"]:checked');
+        
+        if (!selectedAnswer) continue;
+        
+   
+        if (correctAnswers[i-1] === selectedAnswer.value) {
+            correctCount++;
+        }
+    }
+
+    alert("You got " + correctCount + " out of 2 correct.");
+}
+</script>
+
+</body>
+</html>
